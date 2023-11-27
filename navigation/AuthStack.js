@@ -31,7 +31,7 @@ const Stack = createNativeStackNavigator();
 
 const TabNavigator = () => (
   <Tab.Navigator
-  initialRouteName="Home"
+    initialRouteName="Home"
     screenOptions={({ route }) => ({
       tabBarIcon: ({ focused, size, color }) => {
         let iconName;
@@ -47,7 +47,7 @@ const TabNavigator = () => (
 
         return <Ionicons name={iconName} size={size} color={iconColor} />;
       },
-      tabBarLabel: () => null, 
+      tabBarLabel: () => null,
     })}
   >
     <Tab.Screen name="Home" component={HomeScreen} options={{ headerShown: false }} />
@@ -55,6 +55,7 @@ const TabNavigator = () => (
     <Tab.Screen name="Profile" component={ProfileScreen} options={{ headerShown: false }} />
   </Tab.Navigator>
 );
+
 
 const Main = ({ navigation }) => {
   return (

@@ -1,25 +1,8 @@
-import React, { useState } from 'react';
+/* import React, { useState } from 'react';
 import { Text, View, TouchableOpacity, TextInput } from 'react-native';
 
 function DashboardScreen() {
-  const [inputValue, setInputValue] = useState({
-    fname: '',
-    email: "",
-    password: "",
-    indexNo: "",
-  });
-
-  const handleInputChange = (key, value) => {
-    setInputValue((prevValues) => ({
-      ...prevValues,
-      [key]: value,
-    }));
-  };
-
-  const handleSubmit = () => {
-    // Perform any additional logic or actions here
-    console.log("Form Values:", inputValue);
-  };
+ 
 
   return (
     <View style={{ flex: 1, alignItems: "center", justifyContent: "center", paddingHorizontal: 20 }}>
@@ -27,5 +10,23 @@ function DashboardScreen() {
     </View>
   );
 }
+
+export default DashboardScreen;
+
+
+ */
+
+
+import React from 'react';
+import { View } from 'react-native';
+import Quiz from './Quiz'; // Assuming the Quiz component is in the same directory
+import QuizData from './QuizData';
+const DashboardScreen = () => {
+  return (
+    <View style={{ flex: 1 }}>
+      <Quiz data={QuizData} />
+    </View>
+  );
+};
 
 export default DashboardScreen;
