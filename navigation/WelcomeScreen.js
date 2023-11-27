@@ -16,9 +16,13 @@ function WelcomeScreen() {
         <Text style={{fontSize:18,fontWeight:'500',color:"#808080" ,marginTop:10,fontFamily:'Roboto',marginBottom:150}}> Your Curiosty & Enjoable</Text>
         <View style={{width:'100%',alignItems:'center',position:'absolute',bottom:15}}>
           
-          <TouchableOpacity  onPress={() => navigation.navigate("TabNavigator")}
-             style={{height:50,backgroundColor:'#7167f5',alignItems:'center',justifyContent:'center',width:300,borderRadius:6,marginTop:10}}>
-          <Text style={{color:'#fff',fontSize:16,fontWeight:'600'}}>Start</Text>
+          <TouchableOpacity  onPress={() => navigation.navigate("Registration")}
+             style={{height:50,backgroundColor:'#7167f5',alignItems:'center',justifyContent:'center',width:300,borderRadius:6,marginTop:10,marginBottom:10}}>
+          <Text style={{color:'#fff',fontSize:16.5,fontWeight:'600'}}>Teacher</Text>
+        </TouchableOpacity>
+        <TouchableOpacity  onPress={() => navigation.navigate("studentRegistrationScreen")}
+             style={{height:50,backgroundColor:'#7167f5',alignItems:'center',justifyContent:'center',width:300,borderRadius:6,marginTop:10,marginBottom:80}}>
+          <Text style={{color:'#fff',fontSize:16.5,fontWeight:'600'}}>Student</Text>
         </TouchableOpacity>
         </View>
     </SafeAreaView>

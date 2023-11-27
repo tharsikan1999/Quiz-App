@@ -12,17 +12,19 @@ import MaterialIcons from "react-native-vector-icons/MaterialIcons";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import Mainimg from '../../assets/imglog.png'
 import { useState } from "react";
+import RNPickerSelect from 'react-native-picker-select'; 
+import { StyleSheet } from "react-native";
 
 
-const RegistrationScreen = ({ navigation }) => {
-  const [showPassword, setShowPassword] = useState(false);
 
+const StudentRegistrationScreen = ({ navigation }) => {
   const [formValues, setFormValues] = useState({
-    role:"teacher",
+    role:"student",
     name: '',
-    email: '',
+    indexNo: '',
     password: '',
-    
+    email: '',
+    selectedField: null,
   });
 
   const handleInputChange = (key, value) => {
@@ -32,6 +34,21 @@ const RegistrationScreen = ({ navigation }) => {
     }));
   };
 
+  const handleValueChange = (value) => {
+    setFormValues((prevValues) => ({
+      ...prevValues,
+      selectedField: value,
+    }));
+  };
+
+  const placeholder = {
+    label: 'Select your field',
+    value: null,
+    color: '#9EA0A4',
+  };
+
+
+  const [showPassword, setShowPassword] = useState(false);
 
   return (
     <SafeAreaView
@@ -48,13 +65,36 @@ const RegistrationScreen = ({ navigation }) => {
         <Image source={Mainimg} style={{height:220,width:300,overflow:'hidden'}}/>
         </View>
 
-        <View style={{ paddingBottom: 20, marginTop: 15,marginBottom:10 }}>
+        <View style={{ paddingBottom: 20, marginTop: 20 }}>
           <Text style={{ fontWeight: "bold", fontSize: 26 }}>Register</Text>
         </View>
-
-      <View style={{ marginTop: 20 }}>
+        <View style={{ marginTop: 20 }}>
         <Text>{JSON.stringify(formValues, null, 2)}</Text>
-      </View> 
+      </View>
+
+        <View
+          style={{
+            flexDirection: "row",
+            borderBottomColor: "#ccc",
+            borderBottomWidth: 1,
+            paddingBottom: 8,
+            marginBottom: 25,
+            alignItems : 'center',
+            marginTop:7
+          }}
+        >
+          <Ionicons
+            name="person-outline"
+            size={20}
+            color="#666"
+            style={{ marginRight: 5 }}
+          />
+          <TextInput
+        placeholder="Name"
+        style={{ flex: 1, paddingBottom: 0 }}
+        onChangeText={(text) => handleInputChange("name", text)}
+      />
+        </View>
         <View
           style={{
             flexDirection: "row",
@@ -65,18 +105,42 @@ const RegistrationScreen = ({ navigation }) => {
             alignItems : 'center'
           }}
         >
-          <Ionicons
-            name="person-outline"
-            size={20}
-            color="#666"
+          <MaterialIcons
+            name="people"
             style={{ marginRight: 5 }}
+            color="#666"
+            size={20}
           />
-           <TextInput
-        placeholder="Name"
+          <TextInput
+        placeholder="Index-No"
         style={{ flex: 1, paddingBottom: 0 }}
-        onChangeText={(text) => handleInputChange("name", text)}
+        onChangeText={(text) => handleInputChange("indexNo", text)}
       />
+
         </View>
+        <View style={styles.container}>
+      <Ionicons
+        name="book"
+        style={styles.icon}
+        color="#666"
+        size={20}
+      />
+      <RNPickerSelect
+        placeholder={placeholder}
+        onValueChange={handleValueChange}
+        items={[
+          { label: 'Information Technology', value: 'it' },
+          { label: 'Civil', value: 'civil' },
+          { label: 'Mechanical', value: 'mechanical' },
+          { label: 'Electrical', value: 'electrical' },
+          { label: 'Polimer', value: 'polimer' },
+          { label: 'Marine', value: 'marine' },
+        ]}
+        style={pickerSelectStyles}
+        value={formValues.selectedField}
+      />
+      
+    </View>
 
         <View
           style={{
@@ -118,6 +182,7 @@ const RegistrationScreen = ({ navigation }) => {
         color="#666"
         size={20}
       />
+     
       <TextInput
         placeholder="Password"
         style={{ flex: 1, paddingBottom: 0 }}
@@ -136,10 +201,10 @@ const RegistrationScreen = ({ navigation }) => {
       </TouchableOpacity>
     </View>
 
-       
 
         <TouchableOpacity
           onPress={() =>navigation.navigate('Succesfull')}
+         
           style={{
             backgroundColor: "#7167f5",
             height : 60,
@@ -147,6 +212,7 @@ const RegistrationScreen = ({ navigation }) => {
             justifyContent:'center',
             alignItems:'center',
             borderRadius: 15,
+            marginTop:5
           }}
         >
           <Text
@@ -156,6 +222,9 @@ const RegistrationScreen = ({ navigation }) => {
               color: "#fff",
               textAlign: "center",
             }}
+
+          
+           
           >
             Register
           </Text>
@@ -170,13 +239,56 @@ const RegistrationScreen = ({ navigation }) => {
           }}
         >
           <Text style={{fontSize:14.5,fontWeight:'500',color:'#444'}}>Already Registered?</Text>
-          <TouchableOpacity onPress={() => navigation.navigate("Login")} >
+          <TouchableOpacity onPress={() => navigation.navigate("StudentLogin")} >
             <Text style={{ color: "#7167f5", fontWeight: "700",fontSize:16,marginTop:-1 }}> Login</Text>
           </TouchableOpacity>
         </View>
       </ScrollView>
     </SafeAreaView>
   );
+  
 };
 
-export default RegistrationScreen;
+const styles = StyleSheet.create({
+  container: {
+    flexDirection: 'row',
+    borderBottomColor: '#ccc',
+    borderBottomWidth: 1,
+    paddingBottom: 8,
+    marginBottom: 25,
+    alignItems: 'center',
+  },
+  icon: {
+    marginRight: 5,
+  },
+  errorText: {
+    color: 'red',
+    fontSize: 12,
+    marginLeft: 10,
+  },
+});
+
+const pickerSelectStyles = StyleSheet.create({
+  inputIOS: {
+    fontSize: 16,
+    paddingVertical: 12,
+    paddingHorizontal: 10,
+    borderWidth: 1,
+    borderColor: 'gray',
+    borderRadius: 4,
+    color: 'black',
+    paddingRight: 30,
+  },
+  inputAndroid: {
+    fontSize: 16,
+    paddingHorizontal: 10,
+    paddingVertical: 8,
+    borderWidth: 0.5,
+    borderColor: 'purple',
+    borderRadius: 8,
+    color: 'black',
+    paddingRight: 30,
+  },
+});
+
+export default StudentRegistrationScreen;

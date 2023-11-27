@@ -19,11 +19,11 @@ import Mainimg from '../../assets/imglog.png'
 import { useState } from "react";
 
 
-const LoginScreen = ({ navigation }) => {
+const StudentLogin = ({ navigation }) => {
   const [showPassword, setShowPassword] = useState(false);
   const [formValues, setFormValues] = useState({
-    role:"teacher",
-    email: '',
+    role:"student",
+    indexNo: '',
     password: '',
     
   });
@@ -53,10 +53,12 @@ const LoginScreen = ({ navigation }) => {
         <View style={{ paddingBottom: 20, marginTop: 0 }}>
           <Text style={{ fontWeight: "bold", fontSize: 26 }}>Login</Text>
         </View>
-        <View style={{ marginTop: 20 }}>
+
+         <View style={{ marginTop: 20 }}>
         <Text>{JSON.stringify(formValues, null, 2)}</Text>
       </View> 
-        <View
+
+        {/* <View
           style={{
             flexDirection: "row",
             borderBottomColor: "#ccc",
@@ -72,11 +74,33 @@ const LoginScreen = ({ navigation }) => {
             color="#666"
             size={20}
           />
+          <TextInput
+            placeholder="Email ID"
+            style={{ flex: 1, paddingBottom: 0 }}
+            keyboardType="email-address"
+          />
+        </View> */}
+        <View
+          style={{
+            flexDirection: "row",
+            borderBottomColor: "#ccc",
+            borderBottomWidth: 1,
+            paddingBottom: 8,
+            marginBottom: 25,
+            alignItems : 'center',
+            marginTop:15
+          }}
+        >
+          <MaterialIcons
+            name="people"
+            style={{ marginRight: 5 }}
+            color="#666"
+            size={20}
+          />
          <TextInput
-        placeholder="Email-Id"
-        style={{ flex: 1, paddingBottom: 0}}
-        onChangeText={(text) => handleInputChange("email", text)}
-        keyboardType="email-address"
+        placeholder="Index-No"
+        style={{ flex: 1, paddingBottom: 0 }}
+        onChangeText={(text) => handleInputChange("indexNo", text)}
       />
         </View>
 
@@ -96,7 +120,7 @@ const LoginScreen = ({ navigation }) => {
         color="#666"
         size={20}
       />
-       <TextInput
+      <TextInput
         placeholder="Password"
         style={{ flex: 1, paddingBottom: 0 }}
         onChangeText={(text) => handleInputChange("password", text)}
@@ -151,7 +175,7 @@ const LoginScreen = ({ navigation }) => {
         >
           
           <Text style={{fontSize:14.3,fontWeight:'500',color:'#444'}}>New to the app?</Text>
-          <TouchableOpacity onPress={() => navigation.navigate("Registration")}>
+          <TouchableOpacity onPress={() => navigation.navigate("studentRegistrationScreen")}>
             <Text style={{ color: "#7167f5", fontWeight: "700" ,fontSize:15,marginTop:1  }}>
               {" "}
               Register
@@ -164,4 +188,4 @@ const LoginScreen = ({ navigation }) => {
   );
 };
 
-export default LoginScreen;
+export default StudentLogin;

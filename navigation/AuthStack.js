@@ -14,6 +14,10 @@ import EditSettings from "./screens/EditSettings";
 import { NavigationContainer } from "@react-navigation/native";
 import HomeScreen from "./screens/HomeScreen";
 import LogoutScreen from "./screens/LogoutScreen";
+import studentRegistrationScreen from "./screens/StudentRegistrationScreen"
+import StudentLogin from "./screens/StudentLogin";
+
+
 
 
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
@@ -148,6 +152,20 @@ const AuthStack = () => {
         name="Registration"
         options={{ headerShown: false }}
       />
+      <Stack.Screen
+        component={StudentLogin}
+        name="StudentLogin"
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen
+      component={studentRegistrationScreen}
+      name="studentRegistrationScreen"
+      options={{
+        headerShown: false,
+        
+      }}
+      />
+
 
       <Stack.Screen
       component={ForgotPassword}
@@ -191,7 +209,7 @@ const AuthStack = () => {
         animationTypeForReplace: 'pop', 
       }}
       />
-
+      
     </Stack.Navigator>
      </NavigationContainer>
   );

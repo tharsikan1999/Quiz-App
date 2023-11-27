@@ -4,8 +4,6 @@ import { Ionicons } from 'react-native-vector-icons';
 
 import Bug from '../../assets/bug.png'
 
-import { createDrawerNavigator } from '@react-navigation/drawer';
-import { NavigationContainer } from '@react-navigation/native';
 
 export default function ReportScreen({ navigation }) {
   const DrawerOpener = () => {

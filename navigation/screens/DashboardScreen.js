@@ -1,34 +1,31 @@
-import React from 'react'
-import { Text,SafeAreaView,View,TouchableOpacity,Image,ScrollView,TextInput } from 'react-native'
-import { Ionicons,fon } from 'react-native-vector-icons';
-import DefaultImage from ".././screens/man.png";
-import { useNavigation } from '@react-navigation/native';
-import { useState } from 'react';
-import  { Gesture } from 'react-native-gesture-handler';
-import NavigationContainer from '@react-navigation/native';
-import 'react-native-gesture-handler';
+import React, { useState } from 'react';
+import { Text, View, TouchableOpacity, TextInput } from 'react-native';
 
+function DashboardScreen() {
+  const [inputValue, setInputValue] = useState({
+    fname: '',
+    email: "",
+    password: "",
+    indexNo: "",
+  });
 
+  const handleInputChange = (key, value) => {
+    setInputValue((prevValues) => ({
+      ...prevValues,
+      [key]: value,
+    }));
+  };
 
-
-
-
-
-function DashboardScreen({navigation}) {
-
+  const handleSubmit = () => {
+    // Perform any additional logic or actions here
+    console.log("Form Values:", inputValue);
+  };
 
   return (
-    
-    <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
-    <Text
-      onPress={() => navigation.navigate("Home")}
-      style={{ fontSize: 26, fontWeight: "bold" }}
-    >
-      Dashboard Screen
-    </Text>
-  </View>              
-     
-  )
+    <View style={{ flex: 1, alignItems: "center", justifyContent: "center", paddingHorizontal: 20 }}>
+      
+    </View>
+  );
 }
 
-export default DashboardScreen
+export default DashboardScreen;

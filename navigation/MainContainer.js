@@ -72,7 +72,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     position: "relative",
-    paddingBottom: 50, // Adjust this value to give space for the bottom navigation bar
+    paddingBottom: 50, 
   },
 
   shadow: {

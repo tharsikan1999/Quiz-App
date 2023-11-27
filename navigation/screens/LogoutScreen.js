@@ -6,7 +6,7 @@ import LogoutImg from '../../assets/logout.png'
 function LogoutScreen({ navigation }) {
   const handleLogout = () => {
   
-    navigation.navigate('Login'); 
+    navigation.navigate('WelcomeScreen'); 
   }
 
   return (
