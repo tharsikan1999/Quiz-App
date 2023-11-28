@@ -10,6 +10,8 @@ import ContactScreen from './ContactScreen';
 import AboutScreen from './AboutScreen';
 import ReportScreen from './ReportScreen.';
 import LogoutScreen from './LogoutScreen';
+import StartQuiz from './StartQuiz';
+
 
 
 const styles = StyleSheet.create({
@@ -53,7 +55,7 @@ function HomePage({ navigation }) {
           <Text style={styles.headerText}>Welcome Back</Text>
           <Image style={styles.userImage} source={UserImg} />
         </View>
-        
+        <StartQuiz/>
       </ScrollView>
     </SafeAreaView>
   );

@@ -10,6 +10,7 @@ import ContactScreen from './ContactScreen';
 import AboutScreen from './AboutScreen';
 import ReportScreen from './ReportScreen.';
 import LogoutScreen from './LogoutScreen';
+import TeacherViewCall from './TeacherViewCall';
 
 
 const styles = StyleSheet.create({
@@ -20,6 +21,7 @@ const styles = StyleSheet.create({
     height: 80,
     paddingHorizontal: 20,
     backgroundColor: '#7167f5',
+    
     
   },
   headerText: {
@@ -44,8 +46,7 @@ function HomePage({ navigation }) {
   }
 
   return (
-    <SafeAreaView style={{ flex: 1, backgroundColor: '#e7edf9' }}>
-      <ScrollView style={{ flex: 1, paddingTop: 50, }}>
+    <SafeAreaView style={{ flex: 1, backgroundColor: '#e7edf9',paddingTop:50 }}>
         <View style={styles.headerContainer}>
           <TouchableOpacity onPress={DrawerOpener}>
             <Ionicons name="menu" style={styles.menuIcon} />
@@ -53,8 +54,7 @@ function HomePage({ navigation }) {
           <Text style={styles.headerText}>Welcome Back</Text>
           <Image style={styles.userImage} source={UserImg} />
         </View>
-        
-      </ScrollView>
+        <TeacherViewCall/>     
     </SafeAreaView>
   );
 }

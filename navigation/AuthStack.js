@@ -56,7 +56,6 @@ const TabNavigator = () => (
     })}
   >
     <Tab.Screen name="Home" component={StudentHome} options={{ headerShown: false }} />
-    <Tab.Screen name="Dashboard" component={StudentDashboard} options={{ headerShown: false }} />
     <Tab.Screen name="Profile" component={StudentProfile} options={{ headerShown: false }} />
   </Tab.Navigator>
 );
