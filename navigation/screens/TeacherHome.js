@@ -1,7 +1,7 @@
 import * as React from 'react';
-import { Text, View, TouchableOpacity, Image, SafeAreaView, ScrollView } from 'react-native';
+import { Text, View, TouchableOpacity, Image, SafeAreaView, ScrollView, StyleSheet } from 'react-native';
 import { Ionicons } from 'react-native-vector-icons';
-import UserImg from '../../assets/girl.png'
+import UserImg from '../../assets/girl.png';
 
 import { createDrawerNavigator } from '@react-navigation/drawer';
 
@@ -11,55 +11,88 @@ import AboutScreen from './AboutScreen';
 import ReportScreen from './ReportScreen.';
 import LogoutScreen from './LogoutScreen';
 
+
+const styles = StyleSheet.create({
+  headerContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    height: 80,
+    paddingHorizontal: 20,
+    backgroundColor: '#7167f5',
+    
+  },
+  headerText: {
+    fontSize: 24,
+    fontWeight: 'bold',
+    color: '#fff',
+  },
+  menuIcon: {
+    fontSize: 30,
+    color: '#fff',
+  },
+  userImage: {
+    height: 50,
+    width: 50,
+    borderRadius: 25,
+  },
+});
+
 function HomePage({ navigation }) {
   const DrawerOpener = () => {
     navigation.toggleDrawer();
   }
+
   return (
-    <SafeAreaView style={{flex:1,backgroundColor:'#e7edf9'}}>
-        <ScrollView style={{flex:1,paddingTop:38,paddingLeft:2}} >
-        <View style={{position:'relative',justifyContent:'center',alignItems:'center',height:50,flexDirection:'row'}}>
-              <TouchableOpacity onPress={DrawerOpener}
-               style={{borderColor:"#E0E0FF",borderRadius:5,borderWidth:2,position:'absolute',left:5,width:50,alignItems:'center',justifyContent:'center',}} >
-              <Ionicons  style={{fontSize:38,}} name="menu"></Ionicons>
-              </TouchableOpacity>
-               <Text style={{fontSize:19,fontWeight:'700'}}>Welcome Back</Text> 
-              <TouchableOpacity style={{height:45,width:45,borderRadius:50,position:'absolute',right:10}}>
-              <Image style={{height:45,width:45,borderRadius:50,position:'absolute'}} source={UserImg}/>
-              </TouchableOpacity>
+    <SafeAreaView style={{ flex: 1, backgroundColor: '#e7edf9' }}>
+      <ScrollView style={{ flex: 1, paddingTop: 50, }}>
+        <View style={styles.headerContainer}>
+          <TouchableOpacity onPress={DrawerOpener}>
+            <Ionicons name="menu" style={styles.menuIcon} />
+          </TouchableOpacity>
+          <Text style={styles.headerText}>Welcome Back</Text>
+          <Image style={styles.userImage} source={UserImg} />
         </View>
-        </ScrollView>
-      </SafeAreaView>
+        
+      </ScrollView>
+    </SafeAreaView>
   );
 }
 
 const Drawer = createDrawerNavigator();
 
-export default function HomeScreen() {
-  
+export default function TeacherHome() {
   return (
-    
-      <Drawer.Navigator >
-        <Drawer.Screen
-          name="Home"
-          component={HomePage}
-          options={{
-            drawerLabel: 'Home',
-            headerShown:false,
-            drawerIcon: ({ color, size }) => (
-              <Ionicons name="home" size={size} color={color} />
-            ),
-            
-            headerStyle: {
-              backgroundColor: '#e7edf9',
-            },
-            headerTitleStyle: {
-              fontSize: 20,
-              fontWeight:'500' 
-            },
-          }}
-        />
-        <Drawer.Screen
+    <Drawer.Navigator
+      drawerStyle={{
+        backgroundColor: '#f0f4f8',
+        width: 240,
+      }}
+      drawerContentOptions={{
+        activeTintColor: '#7167f5',
+        inactiveTintColor: '#2c3e50',
+        labelStyle: {
+          fontSize: 18,
+          fontWeight: '500',
+          marginLeft: -10,
+        },
+        itemStyle: {
+          marginVertical: 10,
+        },
+      }}
+    >
+      <Drawer.Screen
+        name="Home"
+        component={HomePage}
+        options={{
+          drawerLabel: 'Home',
+          headerShown: false,
+          drawerIcon: ({ color, size }) => (
+            <Ionicons name="home" size={size} color={color} />
+          ),
+        }}
+      />
+       <Drawer.Screen
           name="About Us"
           component={AboutScreen}
           options={{
@@ -116,8 +149,8 @@ export default function HomeScreen() {
             headerShown:false
           }}
         />
-        
-      </Drawer.Navigator>
-   
+    </Drawer.Navigator>
   );
 }
+
+

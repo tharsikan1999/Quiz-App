@@ -1,81 +1,193 @@
 import * as React from "react";
-import { View, Text,SafeAreaView,TouchableOpacity,Image,ScrollView,TextInput } from "react-native";
+import { View, Text, SafeAreaView, TouchableOpacity, Image, ScrollView, TextInput, StyleSheet } from "react-native";
 import { Ionicons } from 'react-native-vector-icons';
 
-import UserImg from '../../assets/girl.png'
-
-import { createDrawerNavigator } from '@react-navigation/drawer';
-import { NavigationContainer } from '@react-navigation/native';
+import UserImg from '../../assets/girl.png';
 
 export default function ContactScreen({ navigation }) {
   const DrawerOpener = () => {
     navigation.toggleDrawer();
-  }
+  };
+
   return (
-    <SafeAreaView style={{flex:1,backgroundColor:'#e7edf9'}}>
-        <ScrollView style={{flex:1,paddingTop:28,paddingLeft:2}} >
-        <View style={{position:'relative',justifyContent:'center',alignItems:'center',height:50,flexDirection:'row'}}>
-              <TouchableOpacity onPress={DrawerOpener}
-               style={{borderColor:"#E0E0FF",borderRadius:5,borderWidth:2,position:'absolute',left:5,width:50,alignItems:'center',justifyContent:'center',}} >
-              <Ionicons  style={{fontSize:38,}} name="menu"></Ionicons>
-              </TouchableOpacity>
-               <Text style={{fontSize:19,fontWeight:'700'}}>Contact Us</Text> 
-              
+    <SafeAreaView style={styles.container}>
+      <ScrollView style={styles.scrollView}>
+        <View style={styles.header}>
+          <TouchableOpacity onPress={DrawerOpener} style={styles.menuIcon}>
+            <Ionicons style={styles.menuIcon} name="menu" />
+          </TouchableOpacity>
+          <Text style={styles.headerText}>Contact Us</Text>
         </View>
-        <View style={{backgroundColor:'#fff',paddingLeft:10,marginLeft:8,marginRight:8,borderRadius:15,paddingBottom:10,marginTop:10}}>
-          <View style={{flexDirection:'row',alignItems:'center'}}>
-          <Ionicons  style={{fontSize:18,color:'#7167f5'}} name="call"></Ionicons>
-            <Text style={{fontSize:16,fontWeight:500,marginLeft:10}} >Phone</Text>
-          </View>
-          <View style={{marginTop:10,paddingLeft:25}}>
-            <Text style={{fontSize:15,fontWeight:400,marginLeft:10}} >Mobile : (+94) 771234567</Text>
-            <Text style={{fontSize:15,fontWeight:400,marginLeft:10}} >Hotline : (+94) 771234567</Text>
 
-          </View>
-
+        <View style={styles.infoContainer}>
+          {renderInfoItem("Phone", [
+            { text: "Mobile: (+94) 771234567" },
+            { text: "Hotline: (+94) 771234567" },
+          ])}
+          {renderInfoItem("Email", [
+            { text: "info@gmail.com" },
+            { text: "example@itum.lk" },
+          ])}
+          {renderInfoItem("Address", [
+            { text: "ITUM" },
+            { text: "Homagama" },
+          ])}
         </View>
-        <View style={{backgroundColor:'#fff',paddingLeft:10,paddingTop:10,marginLeft:8,marginRight:8,borderRadius:15,paddingBottom:10,marginTop:10}}>
-          <View style={{flexDirection:'row',alignItems:'center'}}>
-          <Ionicons  style={{fontSize:18,color:'#7167f5'}} name="mail-open"></Ionicons>
-            <Text style={{fontSize:16,fontWeight:500,marginLeft:10}} >Email</Text>
-          </View>
-          <View style={{marginTop:10,paddingLeft:25}}>
-            <Text style={{fontSize:15,fontWeight:400,marginLeft:10}} >info@gmail.com</Text>
-            <Text style={{fontSize:15,fontWeight:400,marginLeft:10}} >example@itum.lk</Text>
 
-          </View>
+        <View style={styles.formContainer}>
+          <Text style={styles.formTitle}>Get in Touch</Text>
+          {renderInput("Name")}
+          {renderInput("Email")}
+          {renderInput("Message", true)}
 
+          <TouchableOpacity
+            onPress={() => navigation.navigate('Home')}
+            style={styles.submitButton}>
+            <Text style={styles.submitButtonText}>Submit</Text>
+          </TouchableOpacity>
         </View>
-        <View style={{backgroundColor:'#fff',paddingLeft:10,paddingTop:10,marginLeft:8,marginRight:8,borderRadius:15,paddingBottom:10,marginTop:10}}>
-          <View style={{flexDirection:'row',alignItems:'center'}}>
-          <Ionicons  style={{fontSize:18,color:'#7167f5'}} name="home"></Ionicons>
-            <Text style={{fontSize:16,fontWeight:500,marginLeft:10}} >Address</Text>
-          </View>
-          <View style={{marginTop:10,paddingLeft:25}}>
-            <Text style={{fontSize:15,fontWeight:400,marginLeft:10}} >ITUM </Text>
-            <Text style={{fontSize:15,fontWeight:400,marginLeft:10}} >Homagama</Text>
-
-          </View>
-
-        </View>
-        <View style={{padding:8}}>
-          <Text style={{fontSize:18,fontWeight:600}}>Get in Touch</Text>
-          <TextInput style={{marginTop:10,borderRadius:5,height:45,backgroundColor:'#fff',paddingLeft:10,fontSize:16}}
-           placeholder="Name"/>
-            <TextInput style={{marginTop:10,borderRadius:5,height:45,backgroundColor:'#fff',paddingLeft:10,fontSize:16}}
-           placeholder="Email"/>
-           <TextInput style={{marginTop:10,borderRadius:5,height:60,backgroundColor:'#fff',paddingLeft:10,fontSize:16}}
-           placeholder="Message"/>
-        
-           <TouchableOpacity onPress={()=>navigation.navigate('Home')}
-                   style={{height:50,backgroundColor:'#7167f5',alignItems:'center',justifyContent:'center',width:'100%',borderRadius:6,marginTop:10}}>
-                  <Text style={{color:'#fff',fontSize:16,fontWeight:'600'}}>Submit</Text>
-                </TouchableOpacity>
-           
-        </View>
-        
-        </ScrollView>
-      </SafeAreaView>
+      </ScrollView>
+    </SafeAreaView>
   );
 }
 
+const renderInfoItem = (title, details) => (
+  <View style={styles.infoItemContainer}>
+    <View style={styles.infoHeader}>
+      <Ionicons style={styles.infoIcon} name={getInfoIcon(title)} />
+      <Text style={styles.infoTitle}>{title}</Text>
+    </View>
+    {details.map((item, index) => (
+      <Text key={index} style={styles.infoText}>{item.text}</Text>
+    ))}
+  </View>
+);
+
+const renderInput = (placeholder, multiline = false) => (
+  <TextInput
+    style={multiline ? styles.multilineInput : styles.input}
+    placeholder={placeholder}
+    multiline={multiline}
+  />
+);
+
+const getInfoIcon = (title) => {
+  switch (title) {
+    case "Phone":
+      return "call";
+    case "Email":
+      return "mail-open";
+    case "Address":
+      return "home";
+    default:
+      return "information-circle";
+  }
+};
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#e7edf9',
+    paddingTop:30
+  },
+  scrollView: {
+    flex: 1,
+    paddingTop: 28,
+    paddingLeft: 2,
+  },
+  header: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+    height: 50,
+    backgroundColor: '#7167f5',
+  },
+  menuIcon: {
+    fontSize: 38,
+    color: '#fff',
+    position: 'absolute',
+    left: 5,
+    top:3
+  },
+  headerText: {
+    fontSize: 19,
+    fontWeight: '700',
+    color: '#fff',
+  },
+  infoContainer: {
+    backgroundColor: '#fff',
+    padding: 10,
+    margin: 8,
+    borderRadius: 15,
+    marginBottom: 10,
+  },
+  infoItemContainer: {
+    marginBottom: 15,
+  },
+  infoHeader: {
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  infoIcon: {
+    fontSize: 18,
+    color: '#7167f5',
+  },
+  infoTitle: {
+    fontSize: 16,
+    fontWeight: '500',
+    marginLeft: 10,
+    color: '#333',
+  },
+  infoText: {
+    fontSize: 15,
+    fontWeight: '400',
+    marginLeft: 25,
+    color: '#555',
+  },
+  formContainer: {
+    backgroundColor: '#fff',
+    padding: 20,
+    marginLeft: 8,
+    marginRight: 8,
+    borderRadius: 15,
+    paddingBottom: 10,
+    marginTop: 10,
+  },
+  formTitle: {
+    fontSize: 24,
+    fontWeight: '700',
+    marginBottom: 15,
+    color: '#333',
+  },
+  input: {
+    marginTop: 10,
+    borderRadius: 5,
+    height: 50,
+    backgroundColor: '#f5f5f5',
+    paddingLeft: 20,
+    fontSize: 16,
+    color: '#333',
+  },
+  multilineInput: {
+    marginTop: 10,
+    borderRadius: 5,
+    height: 100,
+    backgroundColor: '#f5f5f5',
+    paddingLeft: 20,
+    fontSize: 16,
+    color: '#333',
+  },
+  submitButton: {
+    height: 50,
+    backgroundColor: '#7167f5',
+    alignItems: 'center',
+    justifyContent: 'center',
+    borderRadius: 6,
+    marginTop: 10,
+  },
+  submitButtonText: {
+    color: '#fff',
+    fontSize: 16,
+    fontWeight: '600',
+  },
+});

@@ -125,7 +125,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#7167f5',
     alignItems: 'center',
     justifyContent: 'center',
-    width: 300,
+    width: '100%',
     borderRadius: 6,
     marginTop: 15,
   },
@@ -164,8 +164,8 @@ const styles = StyleSheet.create({
   progressText: {
     textAlign: 'center',
     marginTop: 10,
-    fontSize:16,
-    fontWeight:'600'
+    fontSize: 16,
+    fontWeight: '600',
   },
 });
 

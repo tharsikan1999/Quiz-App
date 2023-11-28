@@ -2,21 +2,26 @@ import * as React from "react";
 import { View, Text, TouchableOpacity,Image } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import LoginScreen from "../navigation/screens/LoginScreen";
-import RegistrationScreen from "./screens/RegistrationScreen";
+import TeacherLogin from "./screens/TeacherLogin";
+import TeacherRegistration from "./screens/TeacherRegistration";
 import Mainimg from '../assets/img.png'
-import ForgotPassword from "./screens/ForgotPassword";
-import DashboardScreen from './screens/DashboardScreen';
-import Succesfull from "./screens/Succesfull";
+import StudentForgotPassword from "./screens/StudentForgotPassword";
+import StudentDashboard from './screens/StudentDashboard';
+import StudentSuccesfull from "./screens/StudentSuccesfull";
 import WelcomeScreen from "./WelcomeScreen";
-import ProfileScreen from "./screens/ProfileScreen";
+import StudentProfile from "./screens/StudentProfile";
 import EditSettings from "./screens/EditSettings";
 import { NavigationContainer } from "@react-navigation/native";
-import HomeScreen from "./screens/HomeScreen";
+import StudentHome from "./screens/StudentHome";
 import LogoutScreen from "./screens/LogoutScreen";
-import studentRegistrationScreen from "./screens/StudentRegistrationScreen"
 import StudentLogin from "./screens/StudentLogin";
-
+import StudentRegister from "./screens/StudentRegister";
+import MainQuiz from "./screens/MainQuiz";
+import TeacherSuccesfull from "./screens/TeacherSuccesfull";
+import TeacherHome from "./screens/TeacherHome";
+import TeacherProfile from "./screens/TeacherProfile";
+import TeacherDashboard from "./screens/TeacherDashboard";
+import TeacherForgotPassword from "./screens/TeacherForgotPassword";
 
 
 
@@ -50,9 +55,36 @@ const TabNavigator = () => (
       tabBarLabel: () => null,
     })}
   >
-    <Tab.Screen name="Home" component={HomeScreen} options={{ headerShown: false }} />
-    <Tab.Screen name="Dashboard" component={DashboardScreen} options={{ headerShown: false }} />
-    <Tab.Screen name="Profile" component={ProfileScreen} options={{ headerShown: false }} />
+    <Tab.Screen name="Home" component={StudentHome} options={{ headerShown: false }} />
+    <Tab.Screen name="Dashboard" component={StudentDashboard} options={{ headerShown: false }} />
+    <Tab.Screen name="Profile" component={StudentProfile} options={{ headerShown: false }} />
+  </Tab.Navigator>
+);
+
+const TeacherTabNavigator = () => (
+  <Tab.Navigator
+    initialRouteName="Home"
+    screenOptions={({ route }) => ({
+      tabBarIcon: ({ focused, size, color }) => {
+        let iconName;
+        if (route.name === 'Home') {
+          iconName = focused ? 'home' : 'home-outline';
+        } else if (route.name === 'Profile') {
+          iconName = focused ? 'person' : 'person-outline';
+        } else if (route.name === 'Dashboard') {
+          iconName = focused ? 'apps' : 'apps-outline';
+        }
+
+        const iconColor = focused ? '#7167f5' : 'gray';
+
+        return <Ionicons name={iconName} size={size} color={iconColor} />;
+      },
+      tabBarLabel: () => null,
+    })}
+  >
+    <Tab.Screen name="Home" component={TeacherHome} options={{ headerShown: false }} />
+    <Tab.Screen name="Dashboard" component={TeacherDashboard} options={{ headerShown: false }} />
+    <Tab.Screen name="Profile" component={TeacherProfile} options={{ headerShown: false }} />
   </Tab.Navigator>
 );
 
@@ -126,8 +158,24 @@ const AuthStack = () => {
       }}
       />
       <Stack.Screen
-      component={HomeScreen}
-      name="HomeScreen"
+      component={TeacherTabNavigator}
+      name="TeacherTabNavigator"
+      options={{
+        headerShown: false,
+        animationTypeForReplace: 'pop', 
+      }}
+      />
+      <Stack.Screen
+      component={TeacherForgotPassword}
+      name="TeacherForgotPassword"
+      options={{
+        headerShown: false,
+        animationTypeForReplace: 'pop', 
+      }}
+      />
+      <Stack.Screen
+      component={StudentHome}
+      name="StudentHome"
       options={{
         headerShown: false,
         animationTypeForReplace: 'pop', 
@@ -141,16 +189,41 @@ const AuthStack = () => {
         animationTypeForReplace: 'pop', 
       }}
       />
-      
+
+     <Stack.Screen
+      component={StudentRegister}
+      name="StudentRegister"
+      options={{
+        headerShown: false,
+        animationTypeForReplace: 'pop', 
+      }}
+      />
+       <Stack.Screen
+      component={MainQuiz}
+      name="MainQuiz"
+      options={{
+        headerShown: false,
+        animationTypeForReplace: 'pop', 
+      }}
+      />
+
+     <Stack.Screen
+      component={TeacherSuccesfull}
+      name="TeacherSuccesfull"
+      options={{
+        headerShown: false,
+        animationTypeForReplace: 'pop', 
+      }}
+      />
       
       <Stack.Screen
-        component={LoginScreen}
-        name="Login"
+        component={TeacherLogin}
+        name="TeacherLogin"
         options={{ headerShown: false }}
       />
       <Stack.Screen
-        component={RegistrationScreen}
-        name="Registration"
+        component={TeacherRegistration}
+        name="TeacherRegistration"
         options={{ headerShown: false }}
       />
       <Stack.Screen
@@ -158,37 +231,30 @@ const AuthStack = () => {
         name="StudentLogin"
         options={{ headerShown: false }}
       />
-      <Stack.Screen
-      component={studentRegistrationScreen}
-      name="studentRegistrationScreen"
-      options={{
-        headerShown: false,
-        
-      }}
-      />
+      
 
 
       <Stack.Screen
-      component={ForgotPassword}
-      name="Forgot"
+      component={StudentForgotPassword}
+      name="StudentForgotPassword"
       options={{headerShown:false}}
       />
 
       <Stack.Screen
-      component={DashboardScreen}
-      name="dashboard"
+      component={StudentDashboard}
+      name="StudentDashboard"
       options={{headerShown:false}}
       />
 
       <Stack.Screen
-      component={Succesfull}
-      name="Succesfull"
+      component={StudentSuccesfull}
+      name="StudentSuccesfull"
       options={{headerShown:false}}
       />
       
       <Stack.Screen
-      component={ProfileScreen}
-      name="ProfileScreen"
+      component={StudentProfile}
+      name="StudentProfile"
       options={{
         headerShown: false,
         animationTypeForReplace: 'pop', 
