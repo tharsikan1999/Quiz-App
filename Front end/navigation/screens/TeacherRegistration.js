@@ -5,6 +5,7 @@ import MaterialIcons from "react-native-vector-icons/MaterialIcons";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import Mainimg from '../../assets/imglog.png';
 import { useState } from "react";
+import axios from "axios";
 
 const TeacherRegistration = ({ navigation }) => {
   const [showPassword, setShowPassword] = useState(false);
@@ -15,6 +16,27 @@ const TeacherRegistration = ({ navigation }) => {
     email: "",
     password: "",
   });
+
+  const requestData = {
+
+    teacherName : formValues.name,
+    teacherEmail : formValues.email,
+    teacherPassword : formValues.password
+
+  }
+
+  const  addTeacher = async (event) => {
+    event.preventDefault();
+    
+    try{
+      const data = await axios.post("http://192.168.8.107:8084/add/teacher",requestData)
+      navigation.navigate('TeacherSuccesfull')
+    }
+    catch(eror){
+      console.error(eror);
+    }
+
+  }
 
   const handleInputChange = (key, value) => {
     setFormValues((prevValues) => ({
@@ -82,7 +104,7 @@ const TeacherRegistration = ({ navigation }) => {
         </View>
 
         <TouchableOpacity
-          onPress={() => navigation.navigate('TeacherSuccesfull')}
+          onPress={addTeacher}
           style={styles.registerButton}
         >
           <Text style={styles.buttonText}>Register</Text>

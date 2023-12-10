@@ -5,6 +5,7 @@ import MaterialIcons from "react-native-vector-icons/MaterialIcons";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import RNPickerSelect from "react-native-picker-select";
 import { StyleSheet } from "react-native";
+import axios from "axios";
 
 import Mainimg from "../../assets/imglog.png";
 
@@ -39,6 +40,27 @@ const StudentRegister = ({ navigation }) => {
   };
 
   const [showPassword, setShowPassword] = useState(false);
+
+  const requestData = {
+    userName : formValues.name,
+    indexNo : formValues.indexNo,
+    field : formValues.selectedField,
+    userEmail : formValues.email,
+    userPassword : formValues.password
+  }
+
+
+
+       async function addusers(event) {
+        event.preventDefault();
+        try {
+          const data = await axios.post("http://192.168.8.107:8084/add/user", requestData);
+          navigation.navigate("StudentSuccesfull");
+        } catch (error) {
+          console.error("Registration error", error);
+        }
+      }
+      
 
   return (
     <SafeAreaView
@@ -123,7 +145,7 @@ const StudentRegister = ({ navigation }) => {
         </View>
 
         <TouchableOpacity
-          onPress={() => navigation.navigate("StudentSuccesfull")}
+          onPress={addusers}
           style={{
             backgroundColor: "#7167f5",
             height: 60,
