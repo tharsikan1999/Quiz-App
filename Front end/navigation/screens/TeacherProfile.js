@@ -26,6 +26,14 @@ function TeacherProfile({ navigation }) {
             <Text style={styles.detailText}>example@gmail.com</Text>
           </View>
         </View>
+
+        <View style={styles.detailPhoneNumber}>
+          <Ionicons style={styles.icons} name="call-outline" />
+          <View>
+            <Text style={styles.detailLabel}>PhoneNumber</Text>
+            <Text style={styles.detailText}>0761234567</Text>
+          </View>
+        </View>
         
       </View>
 
@@ -118,6 +126,19 @@ const styles = StyleSheet.create({
     color: '#fff',
     fontSize: 18,
     fontWeight: '600',
+  },
+  detailPhoneNumber:{
+    paddingHorizontal: 40,
+  },
+  detailNumber:{
+    fontSize:16,
+    fontWeight:'400',
+    color:'#808080'
+  },
+  icons: {
+    fontSize: 30,
+    color: '#7167f5',
+    marginRight: 40,
   },
 });
 

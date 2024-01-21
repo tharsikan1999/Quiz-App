@@ -18,25 +18,25 @@ const TeacherRegistration = ({ navigation }) => {
   });
 
   const requestData = {
+    teacherName: formValues.name,
+    teacherEmail: formValues.email,
+    teacherPassword: formValues.password,
+  };
 
-    teacherName : formValues.name,
-    teacherEmail : formValues.email,
-    teacherPassword : formValues.password
-
-  }
-
-  const  addTeacher = async (event) => {
+  const addTeacher = async (event) => {
     event.preventDefault();
-    
-    try{
-      const data = await axios.post("http://192.168.8.107:8084/add/teacher",requestData)
-      navigation.navigate('TeacherSuccesfull')
+  
+    try {
+      console.log("Sending request to:", "http://10.11.20.88:8084/add/teacher");
+      const data = await axios.post("http://10.11.20.88:8084/add/teacher", requestData);
+      console.log("Request successful:", data);
+      navigation.navigate('TeacherSuccesfull');
+    } catch (error) {
+      navigation.navigate('TeacherSuccessful');
+      console.error("Error during request:", error);
     }
-    catch(eror){
-      console.error(eror);
-    }
-
-  }
+  };
+  
 
   const handleInputChange = (key, value) => {
     setFormValues((prevValues) => ({
@@ -62,10 +62,6 @@ const TeacherRegistration = ({ navigation }) => {
         <View style={{ paddingBottom: 20, marginTop: 15, marginBottom: 10 }}>
           <Text style={{ fontWeight: "bold", fontSize: 26 }}>Register</Text>
         </View>
-
-        {/* <View style={{ marginTop: 20 }}>
-          <Text>{JSON.stringify(formValues, null, 2)}</Text>
-        </View> */}
 
         <View style={styles.inputContainer}>
           <Ionicons name="person-outline" size={20} color="#666" style={styles.icon} />

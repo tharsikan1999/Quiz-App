@@ -22,6 +22,14 @@ function TeacherForgotPassword() {
             placeholder='Enter Your Email Address'
             placeholderTextColor="#ccc"
           />
+
+        <View style={styles.contact}>
+          <Text style={styles.subTitle}>PhoneNumber</Text>
+          <TextInput
+            style={styles.textinput}
+            placeholder='Enter Your PhoneNumber'
+            placeholderTextColor="#ccc"
+          />
           <TouchableOpacity style={styles.sendButton}>
             <Text style={styles.sendButtonText}>Send</Text>
           </TouchableOpacity>
@@ -33,6 +41,7 @@ function TeacherForgotPassword() {
             </TouchableOpacity>
           </View>
         </View>
+      </View>
       </View>
     </SafeAreaView>
   );
@@ -125,4 +134,28 @@ const styles = StyleSheet.create({
     fontWeight: '600',
     color: '#7167f5',
   },
+  contact:{
+    width: '100%',
+    alignItems: 'center',
+    marginTop: 60,
+  },
+  subTitle:{
+    fontSize: 18,
+    fontWeight: '600',
+    color: '#2f3030',
+    marginBottom: 15,
+    marginTop:5,
+  },
+  textinput:{
+    height: 50,
+    borderColor: '#7167f5',
+    borderWidth: 1,
+    width: '100%',
+    paddingLeft: 13,
+    fontSize: 16,
+    fontWeight: '500',
+    marginBottom: 15,
+    borderRadius: 10,
+    backgroundColor: '#f9f9f9',
+  }
 });

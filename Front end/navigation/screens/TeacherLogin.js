@@ -1,8 +1,10 @@
 import React, { useState } from "react";
-import { View, Text, TextInput, TouchableOpacity, ScrollView, Image } from "react-native";
+import { View, Text, TextInput, TouchableOpacity, ScrollView, Image, Alert } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import MaterialIcons from "react-native-vector-icons/MaterialIcons";
 import Ionicons from "react-native-vector-icons/Ionicons";
+import Axios from 'axios';  // Import Axios
+
 import Mainimg from '../../assets/imglog.png';
 
 const TeacherLogin = ({ navigation }) => {
@@ -19,6 +21,31 @@ const TeacherLogin = ({ navigation }) => {
       [key]: value,
     }));
   };
+
+  const handleLogin = async () => {
+    
+    if (!formValues.email.trim() || !formValues.password.trim()) {
+      Alert.alert("Validation Error", "Please enter both email and password.");
+      return;
+    }
+  
+    try {
+      const response = await Axios.post('http://10.11.20.88:8084/login/teacher', formValues);
+  
+      
+      if (response.data && response.data.success) {
+        navigation.navigate('TeacherTabNavigator'); // Navigate to the next screen
+      } else {
+        // Display an error message based on your server response
+        Alert.alert("Login Error", response.data ? response.data.message : "An error occurred. Please try again later.");
+      }
+    } catch (error) {
+      // Handle network or other errors
+      console.error("Login error:", error.message);
+      Alert.alert("Login Error", "An error occurred. Please try again later.");
+    }
+  };
+  
 
   return (
     <SafeAreaView

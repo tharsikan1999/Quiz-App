@@ -54,7 +54,7 @@ const StudentRegister = ({ navigation }) => {
        async function addusers(event) {
         event.preventDefault();
         try {
-          const data = await axios.post("http://192.168.8.107:8084/add/user", requestData);
+          const data = await axios.post("http://10.11.20.88:8084/add/user", requestData);
           navigation.navigate("StudentSuccesfull");
         } catch (error) {
           console.error("Registration error", error);

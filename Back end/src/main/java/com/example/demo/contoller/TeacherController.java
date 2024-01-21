@@ -1,9 +1,11 @@
 package com.example.demo.contoller;
 
 import com.example.demo.Dto.TeacherDto;
-import com.example.demo.Dto.UserDto;
+import com.example.demo.Dto.TeacherLoginDTO;
+import com.example.demo.response.LoginMesage;
 import com.example.demo.service.TeacherService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @CrossOrigin
@@ -19,5 +21,13 @@ public class TeacherController {
         return teacherName;
 
     }
+
+    @PostMapping(path = "/login/teacher")
+    public ResponseEntity<?> loginEmployee(@RequestBody TeacherLoginDTO teacherLoginDTO)
+    {
+        LoginMesage loginResponse = teacherService.loginEmployee(teacherLoginDTO);
+        return ResponseEntity.ok(loginResponse);
+    }
+
 
 }
